@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G_Otopark", "G_Otopark\G_Otopark.csproj", "{0BCE5D96-D6B8-449F-A2E0-B5B932C596F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BCE5D96-D6B8-449F-A2E0-B5B932C596F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCE5D96-D6B8-449F-A2E0-B5B932C596F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCE5D96-D6B8-449F-A2E0-B5B932C596F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCE5D96-D6B8-449F-A2E0-B5B932C596F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {423797F5-26FB-4657-AC0F-D5984063A32A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83b214bf423c4df483cf5692f691e4ff" Name="Diagram1" ZoomLevel="84">
+        <EntityTypeShape EntityType="OtoParkDbModel.G_CTBL" Width="1.5" PointX="8.625" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtoParkDbModel.KullanıcıTBL" Width="1.5" PointX="5.625" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtoParkDbModel.OtoparkTBL" Width="1.5" PointX="11.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtoParkDbModel.SiniflarTBL" Width="1.5" PointX="8.625" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtoParkDbModel.YetkiTBL" Width="1.5" PointX="2.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="OtoParkDbModel.FK_G_CTBL_KullanıcıTBL" ManuallyRouted="false" />
+        <AssociationConnector Association="OtoParkDbModel.FK_G_CTBL_SiniflarTBL" ManuallyRouted="false" />
+        <AssociationConnector Association="OtoParkDbModel.FK_KullanıcıTBL_YetkiTBL" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OtoParkDbModel.KatTBL" Width="1.5" PointX="11.25" PointY="3.75" />
+        <AssociationConnector Association="OtoParkDbModel.FK_G_CTBL_KatTBL1" />
+        <AssociationConnector Association="OtoParkDbModel.FK_KatTBL_OtoparkTBL" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

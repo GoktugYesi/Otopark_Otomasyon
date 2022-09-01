@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OtoParkDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="G/CTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GirisZaman" Type="datetime" Nullable="false" />
+          <Property Name="CıkısZaman" Type="datetime" />
+          <Property Name="Icerdemi" Type="bit" Nullable="false" />
+          <Property Name="Ucret" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KullanıcıID" Type="int" />
+          <Property Name="SinifID" Type="int" Nullable="false" />
+          <Property Name="Plaka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KatID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KatTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OtoparkID" Type="int" Nullable="false" />
+          <Property Name="KatNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kapasite" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KullanıcıTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullanıcıAdSoyad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="YetkiID" Type="int" Nullable="false" />
+          <Property Name="KullanıcıSifre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OtoparkTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OtoparkAd" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiniflarTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SinifAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SınıfUcreti" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="YetkiTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YetkiTuru" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_G/CTBL_KatTBL1">
+          <End Role="KatTBL" Type="Self.KatTBL" Multiplicity="1" />
+          <End Role="G/CTBL" Type="Self.G/CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G/CTBL">
+              <PropertyRef Name="KatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_G/CTBL_KullanıcıTBL">
+          <End Role="KullanıcıTBL" Type="Self.KullanıcıTBL" Multiplicity="0..1" />
+          <End Role="G/CTBL" Type="Self.G/CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullanıcıTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G/CTBL">
+              <PropertyRef Name="KullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_G/CTBL_SiniflarTBL">
+          <End Role="SiniflarTBL" Type="Self.SiniflarTBL" Multiplicity="1" />
+          <End Role="G/CTBL" Type="Self.G/CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiniflarTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G/CTBL">
+              <PropertyRef Name="SinifID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KatTBL_OtoparkTBL">
+          <End Role="OtoparkTBL" Type="Self.OtoparkTBL" Multiplicity="1" />
+          <End Role="KatTBL" Type="Self.KatTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OtoparkTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KatTBL">
+              <PropertyRef Name="OtoparkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullanıcıTBL_YetkiTBL">
+          <End Role="YetkiTBL" Type="Self.YetkiTBL" Multiplicity="1" />
+          <End Role="KullanıcıTBL" Type="Self.KullanıcıTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YetkiTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullanıcıTBL">
+              <PropertyRef Name="YetkiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OtoParkDbModelStoreContainer">
+          <EntitySet Name="G/CTBL" EntityType="Self.G/CTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KatTBL" EntityType="Self.KatTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullanıcıTBL" EntityType="Self.KullanıcıTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtoparkTBL" EntityType="Self.OtoparkTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiniflarTBL" EntityType="Self.SiniflarTBL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YetkiTBL" EntityType="Self.YetkiTBL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_G/CTBL_KatTBL1" Association="Self.FK_G/CTBL_KatTBL1">
+            <End Role="KatTBL" EntitySet="KatTBL" />
+            <End Role="G/CTBL" EntitySet="G/CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_G/CTBL_KullanıcıTBL" Association="Self.FK_G/CTBL_KullanıcıTBL">
+            <End Role="KullanıcıTBL" EntitySet="KullanıcıTBL" />
+            <End Role="G/CTBL" EntitySet="G/CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_G/CTBL_SiniflarTBL" Association="Self.FK_G/CTBL_SiniflarTBL">
+            <End Role="SiniflarTBL" EntitySet="SiniflarTBL" />
+            <End Role="G/CTBL" EntitySet="G/CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KatTBL_OtoparkTBL" Association="Self.FK_KatTBL_OtoparkTBL">
+            <End Role="OtoparkTBL" EntitySet="OtoparkTBL" />
+            <End Role="KatTBL" EntitySet="KatTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullanıcıTBL_YetkiTBL" Association="Self.FK_KullanıcıTBL_YetkiTBL">
+            <End Role="YetkiTBL" EntitySet="YetkiTBL" />
+            <End Role="KullanıcıTBL" EntitySet="KullanıcıTBL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OtoParkDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="G_CTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GirisZaman" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CıkısZaman" Type="DateTime" Precision="3" />
+          <Property Name="Icerdemi" Type="Boolean" Nullable="false" />
+          <Property Name="Ucret" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KullanıcıID" Type="Int32" />
+          <Property Name="SinifID" Type="Int32" Nullable="false" />
+          <Property Name="Plaka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KullanıcıTBL" Relationship="Self.FK_G_CTBL_KullanıcıTBL" FromRole="G_CTBL" ToRole="KullanıcıTBL" />
+          <NavigationProperty Name="SiniflarTBL" Relationship="Self.FK_G_CTBL_SiniflarTBL" FromRole="G_CTBL" ToRole="SiniflarTBL" />
+          <Property Name="KatID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KatTBL" Relationship="OtoParkDbModel.FK_G_CTBL_KatTBL1" FromRole="G_CTBL" ToRole="KatTBL" />
+        </EntityType>
+        <EntityType Name="KullanıcıTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullanıcıAdSoyad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YetkiID" Type="Int32" Nullable="false" />
+          <Property Name="KullanıcıSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="G_CTBL" Relationship="Self.FK_G_CTBL_KullanıcıTBL" FromRole="KullanıcıTBL" ToRole="G_CTBL" />
+          <NavigationProperty Name="YetkiTBL" Relationship="Self.FK_KullanıcıTBL_YetkiTBL" FromRole="KullanıcıTBL" ToRole="YetkiTBL" />
+        </EntityType>
+        <EntityType Name="OtoparkTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OtoparkAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KatTBL" Relationship="OtoParkDbModel.FK_KatTBL_OtoparkTBL" FromRole="OtoparkTBL" ToRole="KatTBL" />
+        </EntityType>
+        <EntityType Name="SiniflarTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SinifAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SınıfUcreti" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="G_CTBL" Relationship="Self.FK_G_CTBL_SiniflarTBL" FromRole="SiniflarTBL" ToRole="G_CTBL" />
+        </EntityType>
+        <EntityType Name="YetkiTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YetkiTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KullanıcıTBL" Relationship="Self.FK_KullanıcıTBL_YetkiTBL" FromRole="YetkiTBL" ToRole="KullanıcıTBL" />
+        </EntityType>
+        <Association Name="FK_G_CTBL_KullanıcıTBL">
+          <End Role="KullanıcıTBL" Type="Self.KullanıcıTBL" Multiplicity="0..1" />
+          <End Role="G_CTBL" Type="Self.G_CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullanıcıTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G_CTBL">
+              <PropertyRef Name="KullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_G_CTBL_SiniflarTBL">
+          <End Role="SiniflarTBL" Type="Self.SiniflarTBL" Multiplicity="1" />
+          <End Role="G_CTBL" Type="Self.G_CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiniflarTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G_CTBL">
+              <PropertyRef Name="SinifID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullanıcıTBL_YetkiTBL">
+          <End Role="YetkiTBL" Type="Self.YetkiTBL" Multiplicity="1" />
+          <End Role="KullanıcıTBL" Type="Self.KullanıcıTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YetkiTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullanıcıTBL">
+              <PropertyRef Name="YetkiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OtoParkDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="G_CTBL" EntityType="Self.G_CTBL" />
+          <EntitySet Name="KullanıcıTBL" EntityType="Self.KullanıcıTBL" />
+          <EntitySet Name="OtoparkTBL" EntityType="Self.OtoparkTBL" />
+          <EntitySet Name="SiniflarTBL" EntityType="Self.SiniflarTBL" />
+          <EntitySet Name="YetkiTBL" EntityType="Self.YetkiTBL" />
+          <AssociationSet Name="FK_G_CTBL_KullanıcıTBL" Association="Self.FK_G_CTBL_KullanıcıTBL">
+            <End Role="KullanıcıTBL" EntitySet="KullanıcıTBL" />
+            <End Role="G_CTBL" EntitySet="G_CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_G_CTBL_SiniflarTBL" Association="Self.FK_G_CTBL_SiniflarTBL">
+            <End Role="SiniflarTBL" EntitySet="SiniflarTBL" />
+            <End Role="G_CTBL" EntitySet="G_CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullanıcıTBL_YetkiTBL" Association="Self.FK_KullanıcıTBL_YetkiTBL">
+            <End Role="YetkiTBL" EntitySet="YetkiTBL" />
+            <End Role="KullanıcıTBL" EntitySet="KullanıcıTBL" />
+          </AssociationSet>
+          <EntitySet Name="KatTBL" EntityType="OtoParkDbModel.KatTBL" />
+          <AssociationSet Name="FK_G_CTBL_KatTBL1" Association="OtoParkDbModel.FK_G_CTBL_KatTBL1">
+            <End Role="KatTBL" EntitySet="KatTBL" />
+            <End Role="G_CTBL" EntitySet="G_CTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KatTBL_OtoparkTBL" Association="OtoParkDbModel.FK_KatTBL_OtoparkTBL">
+            <End Role="OtoparkTBL" EntitySet="OtoparkTBL" />
+            <End Role="KatTBL" EntitySet="KatTBL" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="KatTBL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OtoparkID" Type="Int32" Nullable="false" />
+          <Property Name="KatNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="G_CTBL" Relationship="OtoParkDbModel.FK_G_CTBL_KatTBL1" FromRole="KatTBL" ToRole="G_CTBL" />
+          <NavigationProperty Name="OtoparkTBL" Relationship="OtoParkDbModel.FK_KatTBL_OtoparkTBL" FromRole="KatTBL" ToRole="OtoparkTBL" />
+          <Property Name="Kapasite" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_G_CTBL_KatTBL1">
+          <End Type="OtoParkDbModel.KatTBL" Role="KatTBL" Multiplicity="1" />
+          <End Type="OtoParkDbModel.G_CTBL" Role="G_CTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="G_CTBL">
+              <PropertyRef Name="KatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KatTBL_OtoparkTBL">
+          <End Type="OtoParkDbModel.OtoparkTBL" Role="OtoparkTBL" Multiplicity="1" />
+          <End Type="OtoParkDbModel.KatTBL" Role="KatTBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OtoparkTBL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KatTBL">
+              <PropertyRef Name="OtoparkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OtoParkDbModelStoreContainer" CdmEntityContainer="OtoParkDbEntities">
+          <EntitySetMapping Name="G_CTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.G_CTBL">
+              <MappingFragment StoreEntitySet="G/CTBL">
+                <ScalarProperty Name="KatID" ColumnName="KatID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GirisZaman" ColumnName="GirisZaman" />
+                <ScalarProperty Name="CıkısZaman" ColumnName="CıkısZaman" />
+                <ScalarProperty Name="Icerdemi" ColumnName="Icerdemi" />
+                <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+                <ScalarProperty Name="KullanıcıID" ColumnName="KullanıcıID" />
+                <ScalarProperty Name="SinifID" ColumnName="SinifID" />
+                <ScalarProperty Name="Plaka" ColumnName="Plaka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullanıcıTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.KullanıcıTBL">
+              <MappingFragment StoreEntitySet="KullanıcıTBL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullanıcıAdSoyad" ColumnName="KullanıcıAdSoyad" />
+                <ScalarProperty Name="YetkiID" ColumnName="YetkiID" />
+                <ScalarProperty Name="KullanıcıSifre" ColumnName="KullanıcıSifre" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtoparkTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.OtoparkTBL">
+              <MappingFragment StoreEntitySet="OtoparkTBL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OtoparkAd" ColumnName="OtoparkAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiniflarTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.SiniflarTBL">
+              <MappingFragment StoreEntitySet="SiniflarTBL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SinifAdi" ColumnName="SinifAdi" />
+                <ScalarProperty Name="SınıfUcreti" ColumnName="SınıfUcreti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YetkiTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.YetkiTBL">
+              <MappingFragment StoreEntitySet="YetkiTBL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="YetkiTuru" ColumnName="YetkiTuru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KatTBL">
+            <EntityTypeMapping TypeName="OtoParkDbModel.KatTBL">
+              <MappingFragment StoreEntitySet="KatTBL">
+                <ScalarProperty Name="Kapasite" ColumnName="Kapasite" />
+                <ScalarProperty Name="KatNo" ColumnName="KatNo" />
+                <ScalarProperty Name="OtoparkID" ColumnName="OtoparkID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
